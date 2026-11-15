@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tư vấn nghề nghiệp</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #edf7ff;
+    color: #194675;
+}
+
+/* ĐẦU TRANG */
+header {
+    background: #174d82;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* HÌNH ẢNH CHÀO MỪNG */
+.banner {
+    width: 100%;
+    height: 360px;
+    background:
+        linear-gradient(rgba(15,52,91,0.35),rgba(15,52,91,0.45)),
+        url("https://images.unsplash.com/photo-1521737711867-e3b97375f902")
+        center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 60px;
+    letter-spacing: 6px;
+    text-shadow: 2px 3px 8px #173d68;
+}
+
+/* GIỚI THIỆU */
+.introduction {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.introduction h2 {
+    font-size: 28px;
+    color: #174d82;
+    margin-bottom: 15px;
+}
+
+.introduction p {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* NGÀNH NGHỀ NỔI BẬT */
+.featured {
+    padding: 20px 5% 45px;
+}
+
+.featured h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+.featured-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.featured-item {
+    background: white;
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px #c6dced;
+    text-align: center;
+}
+
+.featured-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.featured-item h3 {
+    padding: 15px;
+    color: #174d82;
+}
+
+/* KHUNG THÔNG TIN */
+.container {
+    width: 90%;
+    max-width: 950px;
+    margin: 20px auto 50px;
+    padding: 35px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px #c6dbea;
+}
+
+.container > h2 {
+    text-align: center;
+    color: #174d82;
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+.description {
+    text-align: center;
+    color: #6885a0;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.section-title {
+    font-size: 21px;
+    color: #174d82;
+    border-left: 5px solid #69b9ec;
+    padding-left: 12px;
+    margin: 28px 0 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #b5d1e9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f7fbff;
+    color: #194675;
+}
+
+input:focus {
+    outline: 2px solid #75bde9;
+}
+
+.note {
+    color: #d05a5a;
+    font-size: 14px;
+    margin: 10px 0 15px;
+    font-style: italic;
+}
+
+/* NÚT TƯ VẤN */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 10px;
+    background: #174d82;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #2878b6;
+}
+
+/* KẾT QUẢ */
+#result {
+    display: none;
+    margin-top: 45px;
+    padding-top: 30px;
+    border-top: 3px solid #b7d9f1;
+}
+
+#result h2 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.personal-info {
+    background: #e7f4ff;
+    border-radius: 12px;
+    padding: 20px;
+    line-height: 2;
+    margin-bottom: 30px;
+}
+
+.result-description {
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.career-group {
+    margin-bottom: 30px;
+}
+
+.career-group h3 {
+    color: #174d82;
+    font-size: 21px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #c8e3f7;
+}
+
+.career-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.career-card {
+    background: #edf7ff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px #c8ddec;
+    transition: 0.25s;
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+}
+
+.career-card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    display: block;
+}
+
+.career-card h4 {
+    text-align: center;
+    padding: 15px 8px;
+    font-size: 17px;
+    color: #174d82;
+}
+
+.no-result {
+    text-align: center;
+    background: #e7f4ff;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.8;
+}
+
+.footer {
+    background: #174d82;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    line-height: 1.8;
+}
+
+/* GIAO DIỆN ĐIỆN THOẠI */
+@media (max-width: 700px) {
+    .featured-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .career-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container {
+        padding: 22px;
+    }
+
+    .banner {
+        height: 240px;
+    }
+
+    .banner h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 400px) {
+    .career-list {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    TƯ VẤN NGHỀ NGHIỆP
+</header>
+
+<!-- TRANG CHỦ -->
+<section class="banner">
+    <h1>XIN CHÀO</h1>
+</section>
+
+<section class="introduction">
+    <h2>KHÁM PHÁ NGHỀ NGHIỆP TƯƠNG LAI</h2>
+    <p>
+        Mỗi người đều có năng lực, sở thích và niềm đam mê riêng.
+        Hãy cùng khám phá những ngành nghề phù hợp với bản thân
+        để có thêm định hướng cho tương lai.
+    </p>
+</section>
+
+<!-- HÌNH ẢNH NGÀNH NGHỀ -->
+<section class="featured">
+    <h2>MỘT SỐ NGÀNH NGHỀ NỔI BẬT</h2>
+
+    <div class="featured-list">
+
+        <div class="featured-item">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d" alt="Y tế">
+            <h3>Y tế</h3>
+        </div>
+
+        <div class="featured-item">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7" alt="Giáo dục">
+            <h3>Giáo dục</h3>
+        </div>
+
+        <div class="featured-item">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Kinh tế">
+            <h3>Kinh tế</h3>
+        </div>
+
+        <div class="featured-item">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" alt="Công nghệ">
+            <h3>Công nghệ</h3>
+        </div>
+
+    </div>
+</section>
+
+<!-- BIỂU MẪU -->
+<main class="container">
+
+<h2>THÔNG TIN CÁ NHÂN</h2>
+
+<p class="description">
+    Vui lòng điền thông tin và lựa chọn môn học,
+    sở thích để nhận được kết quả tư vấn.
+</p>
+
+<form id="careerForm">
+
+    <h3 class="section-title">1. Thông tin cơ bản</h3>
+
+    <label for="fullname">Họ và tên:</label>
+    <input type="text" id="fullname"
+           placeholder="Nhập họ và tên của bạn"
+           required>
+
+    <label for="birthday">Ngày tháng năm sinh:</label>
+    <input type="date" id="birthday" required>
+
+    <label for="gender">Giới tính:</label>
+    <input type="text" id="gender"
+           placeholder="Ví dụ: Nam, Nữ"
+           required>
+
+    <label for="level">Cấp học:</label>
+    <input type="text" id="level"
+           placeholder="Ví dụ: Cấp 3, Đại học"
+           required>
+
+    <h3 class="section-title">2. Môn học yêu thích</h3>
+
+    <p class="note">
+        Bắt buộc nhập ít nhất 1 môn, tối đa 2 môn.
+        Nếu chỉ thích 1 môn, có thể bỏ trống ô thứ hai.
+    </p>
+
+    <label for="subject1">Môn học thứ nhất:</label>
+    <input type="text" id="subject1"
+           placeholder="Ví dụ: Văn"
+           required>
+
+    <label for="subject2">Môn học thứ hai:</label>
+    <input type="text" id="subject2"
+           placeholder="Nhập môn học thứ hai (không bắt buộc)">
+
+    <h3 class="section-title">3. Sở thích cá nhân</h3>
+
+    <p class="note">
+        Không bắt buộc. Có thể nhập hoặc bỏ trống.
+    </p>
+
+    <label for="hobby">Sở thích:</label>
+    <input type="text" id="hobby"
+           placeholder="Ví dụ: Hát, âm nhạc, vẽ, thể thao">
+
+    <button type="submit" class="submit-btn">
+        XEM KẾT QUẢ TƯ VẤN
+    </button>
+
+</form>
+
+<!-- KHU VỰC KẾT QUẢ -->
+<section id="result">
+
+    <h2>KẾT QUẢ TƯ VẤN NGHỀ NGHIỆP</h2>
+
+    <p class="result-description">
+        Dưới đây là những nghề nghiệp được gợi ý
+        dựa trên môn học và sở thích của bạn.
+    </p>
+
+    <div class="personal-info" id="personalInfo"></div>
+
+    <div id="careerList"></div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+    WEBSITE TƯ VẤN NGHỀ NGHIỆP
+    <br><br>
+    Khám phá khả năng - Định hướng tương lai
+</footer>
+
+<script>
+
+// CHUẨN HÓA CHỮ NHẬP
+function normalizeText(text) {
+    return text.trim()
+        .normalize("NFC")
+        .toLowerCase();
+}
+
+// CHUẨN HÓA HỌ TÊN
+document.getElementById("fullname").addEventListener("blur", function() {
+    this.value = this.value.trim().replace(/\s+/g, " ")
+        .replace(/(^|\s)\p{L}/gu, x => x.toUpperCase());
+});
+
+// GIỚI HẠN NGÀY SINH
+document.getElementById("birthday").max =
+    new Date().toISOString().split("T")[0];
+
+
+// DỮ LIỆU NGHỀ NGHIỆP THEO MÔN HỌC
+const careerData = {
+
+    "văn": [
+        ["Nhà báo", "photo-1504711434969-e33886168f5c"],
+        ["Chuyên viên truyền thông", "photo-1552664730-d307ca884978"],
+        ["Chuyên viên tiếp thị", "photo-1533750349088-cd871a92f312"]
+    ],
+
+    "anh": [
+        ["Chuyên viên ngôn ngữ Anh", "photo-1455390582262-044cdead277a"],
+        ["Giáo viên tiếng Anh", "photo-1509062522246-3755977927d7"],
+        ["Phiên dịch viên", "photo-1521737711867-e3b97375f902"]
+    ],
+
+    "toán": [
+        ["Chuyên viên kinh tế", "photo-1460925895917-afdab827c52f"],
+        ["Chuyên viên đầu tư", "photo-1460472178825-e5240623afd5"],
+        ["Chủ doanh nghiệp", "photo-1497366811353-6870744d04b2"],
+        ["Chuyên viên tiếp thị", "photo-1533750349088-cd871a92f312"]
+    ],
+
+    "sinh": [
+        ["Bác sĩ", "photo-1612349317150-e413f6a5b16d"],
+        ["Dược sĩ", "photo-1576091160399-112ba8d25d1d"],
+        ["Nhà nghiên cứu y học", "photo-1584982751601-97dcc096659c"]
+    ],
+
+    "lý": [
+        ["Kỹ sư cơ khí", "photo-1581092160562-40aa08e78837"],
+        ["Kỹ sư điện", "photo-1473341304170-971dccb5ac1e"],
+        ["Kỹ sư điện tử", "photo-1518770660439-4636190af475"]
+    ],
+
+    "hoá": [
+        ["Nhà nghiên cứu hóa học", "photo-1532094349884-543bc11b234d"],
+        ["Chuyên viên nghiên cứu mỹ phẩm", "photo-1608248543803-ba4f8c70ae0b"],
+        ["Kỹ sư hóa chất", "photo-1581093458791-9d42e3c4e4f7"]
+    ],
+
+    "hóa": [
+        ["Nhà nghiên cứu hóa học", "photo-1532094349884-543bc11b234d"],
+        ["Chuyên viên nghiên cứu mỹ phẩm", "photo-1608248543803-ba4f8c70ae0b"],
+        ["Kỹ sư hóa chất", "photo-1581093458791-9d42e3c4e4f7"]
+    ],
+
+    "địa": [
+        ["Hướng dẫn viên du lịch", "photo-1530789253388-582c481c54b0"],
+        ["Nhân viên quản lý khách sạn", "photo-1566073771259-6a8506099945"],
+        ["Chuyên viên đo đạc địa hình", "photo-1504307651254-35680f356dfd"],
+        ["Chuyên viên dự báo thời tiết", "photo-1534088568595-a066f410bcda"]
+    ],
+
+    "tin": [
+        ["Lập trình viên", "photo-1461749280684-dccba630e2f6"],
+        ["Kỹ sư công nghệ thông tin", "photo-1518770660439-4636190af475"],
+        ["Chuyên viên máy tính", "photo-1519389950473-47ba0277781c"]
+    ]
+
+};
+
+
+// DỮ LIỆU NGHỀ NGHIỆP THEO SỞ THÍCH
+const hobbyData = {
+
+    "hát": [
+        ["Ca sĩ", "photo-1516280440614-37939bbacd81"],
+        ["Nhạc sĩ", "photo-1511379938547-c1f69419868d"],
+        ["Nghệ sĩ nhạc cụ", "photo-1510915361894-db8b60106cb1"]
+    ],
+
+    "âm nhạc": [
+        ["Ca sĩ", "photo-1516280440614-37939bbacd81"],
+        ["Nhạc sĩ", "photo-1511379938547-c1f69419868d"],
+        ["Nghệ sĩ nhạc cụ", "photo-1510915361894-db8b60106cb1"]
+    ],
+
+    "vẽ": [
+        ["Kiến trúc sư", "photo-1503387762-592deb58ef4e"],
+        ["Họa sĩ", "photo-1513364776144-60967b0f800f"],
+        ["Nhà thiết kế đồ họa", "photo-1545235617-9465d2a55698"],
+        ["Nhà thiết kế thời trang", "photo-1483985988355-763728e1935b"]
+    ],
+
+    "thể thao": [
+        ["Giáo viên thể dục", "photo-1574629810360-7efbbe195018"],
+        ["Huấn luyện viên thể thao", "photo-1530549387789-4c1017266635"]
+    ]
+
+};
+
+
+// TẠO THẺ NGHỀ NGHIỆP
+function createCareerCard(career) {
+
+    const card = document.createElement("div");
+    card.className = "career-card";
+
+    const img = document.createElement("img");
+    img.src = "https://images.unsplash.com/" +
+        career[1] + "?auto=format&fit=crop&w=600&q=80";
+    img.alt = career[0];
+    img.loading = "lazy";
+
+    const title = document.createElement("h4");
+    title.textContent = career[0];
+
+    card.appendChild(img);
+    card.appendChild(title);
+
+    return card;
+}
+
+
+// XỬ LÝ KẾT QUẢ TƯ VẤN
+document.getElementById("careerForm").addEventListener(
+    "submit", function(event) {
+
+    event.preventDefault();
+
+    const fullname = document.getElementById("fullname").value.trim();
+    const birthday = document.getElementById("birthday").value;
+    const gender = document.getElementById("gender").value.trim();
+    const level = document.getElementById("level").value.trim();
+
+    const subject1 = document.getElementById("subject1").value.trim();
+    const subject2 = document.getElementById("subject2").value.trim();
+    const hobby = document.getElementById("hobby").value.trim();
+
+    // KIỂM TRA THÔNG TIN
+    if (!fullname || !birthday || !gender || !level || !subject1) {
+        alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+        return;
+    }
+
+    if (new Date(birthday) > new Date()) {
+        alert("Ngày sinh không hợp lệ!");
+        return;
+    }
+
+    // KIỂM TRA MÔN HỌC
+    const subjects = [subject1, subject2].filter(x => x !== "");
+
+    if (subjects.length > 2) {
+        alert("Bạn chỉ được nhập tối đa 2 môn học!");
+        return;
+    }
+
+    // TỔNG HỢP NGHỀ THEO MÔN HỌC
+    let subjectCareers = [];
+
+    subjects.forEach(subject => {
+
+        const key = normalizeText(subject);
+
+        if (careerData[key]) {
+            subjectCareers.push(...careerData[key]);
+        }
+
+    });
+
+    // TỔNG HỢP NGHỀ THEO SỞ THÍCH
+    let hobbyCareers = [];
+
+    if (hobby !== "") {
+
+        const hobbyText = normalizeText(hobby);
+
+        Object.keys(hobbyData).forEach(key => {
+
+            if (hobbyText.includes(key)) {
+                hobbyCareers.push(...hobbyData[key]);
+            }
+
+        });
+
+    }
+
+    // LOẠI BỎ NGHỀ TRÙNG
+    function removeDuplicates(arr) {
+        return [...new Map(
+            arr.map(item => [item[0], item])
+        ).values()];
+    }
+
+    subjectCareers = removeDuplicates(subjectCareers);
+    hobbyCareers = removeDuplicates(hobbyCareers);
+
+    // HIỂN THỊ THÔNG TIN
+    const info = document.getElementById("personalInfo");
+
+    info.innerHTML = "";
+
+    const lines = [
+        ["Họ và tên", fullname],
+        ["Ngày sinh", birthday],
+        ["Giới tính", gender],
+        ["Cấp học", level],
+        ["Môn học yêu thích", subjects.join(", ")],
+        ["Sở thích", hobby || "Không có"]
+    ];
+
+    lines.forEach(([label, value]) => {
+        const row = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = label + ": ";
+        row.appendChild(strong);
+        row.appendChild(document.createTextNode(value));
+        info.appendChild(row);
+    });
+
+    // HIỂN THỊ NGHỀ NGHIỆP
+    const resultList = document.getElementById("careerList");
+    resultList.innerHTML = "";
+
+    function renderGroup(title, careers) {
+
+        if (careers.length === 0) return;
+
+        const group = document.createElement("div");
+        group.className = "career-group";
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const list = document.createElement("div");
+        list.className = "career-list";
+
+        careers.forEach(career => {
+            list.appendChild(createCareerCard(career));
+        });
+
+        group.appendChild(heading);
+        group.appendChild(list);
+
+        resultList.appendChild(group);
+    }
+
+    renderGroup("NGHỀ NGHIỆP THEO MÔN HỌC", subjectCareers);
+
+    // Chỉ hiện nhóm sở thích nếu người tham gia đã nhập sở thích
+    if (hobby !== "") {
+        renderGroup("NGHỀ NGHIỆP THEO SỞ THÍCH", hobbyCareers);
+    }
+
+    // THÔNG BÁO KHI KHÔNG NHẬN DIỆN ĐƯỢC
+    if (subjectCareers.length === 0 && hobbyCareers.length === 0) {
+
+        const message = document.createElement("div");
+        message.className = "no-result";
+        message.textContent =
+            "Chưa tìm thấy nghề nghiệp phù hợp với thông tin đã nhập. " +
+            "Vui lòng kiểm tra lại tên môn học hoặc sở thích.";
+
+        resultList.appendChild(message);
+
+    } else if (subjectCareers.length === 0) {
+
+        const message = document.createElement("div");
+        message.className = "no-result";
+        message.textContent =
+            "Chưa nhận diện được môn học. Vui lòng nhập tên môn học " +
+            "theo các môn Văn, Anh, Toán, Sinh, Lý, Hoá, Địa hoặc Tin.";
+
+        resultList.prepend(message);
+    }
+
+    // HIỆN KẾT QUẢ
+    const result = document.getElementById("result");
+    result.style.display = "block";
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+});
+</script>
+
+</body>
+</html>
